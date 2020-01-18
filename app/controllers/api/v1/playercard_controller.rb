@@ -1,16 +1,12 @@
-class PlayercardsController < ApplicationController
+class Api::V1::PlayercardController < ApplicationController
     def index      
-        @playercards = Playercard.all 
-        render json: @playercards
-        # if logged_in?
-        # @playercard = current_user.playercard
-        # render json: PlayerCardSerializer.new(@playercard)
-       
-        # else 
-        #     render json: {
-        #         error: "You must be logged in to see your player card."
-        #     }
-        # end
+        if params[:user_id]
+            @user = current_user
+            @playercard = @user.playercard
+        else
+            @playercard = Playercard.all 
+            render json: @playercard
+        end
     end
 
     def show
