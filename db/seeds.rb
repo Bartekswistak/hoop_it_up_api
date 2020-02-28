@@ -17,3 +17,13 @@ users = User.create([
     password: 'password'
 }
 ])
+
+playercard = Playercard.create({
+    player_nickname: "test",
+    player_age: "12",
+    player_height_in_feet:"6",
+    player_height_in_inches:"2",
+    player_weight: "120",
+    player_fav_player:"Kobe",
+    user_id: 4
+})
