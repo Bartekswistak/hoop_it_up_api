@@ -1,7 +1,8 @@
 class Api::V1::PlayercardController < ApplicationController
+    before_action :set_user 
+
     def index      
         if params[:user_id]
-            @user = set_user
             @playercard = @user.playercard
         else
             @playercard = Playercard.all   
@@ -15,9 +16,8 @@ class Api::V1::PlayercardController < ApplicationController
     end
 
     def create
-         if logged_in?
+           binding.pry 
             @playercard = Playercard.new(playercard_params)
-            @user = current_user
             
             if @playercard.save
                 render json: @user
@@ -26,7 +26,6 @@ class Api::V1::PlayercardController < ApplicationController
                 error: @playercard.errors.full_messages.to_sentence
                 }
             end
-         end
     end
 
     def update
@@ -35,7 +34,7 @@ class Api::V1::PlayercardController < ApplicationController
                 render json: @playercard
             else
                 render json: {
-                    error: @playercard.errors.full_messages.to_sentence
+                error: @playercard.errors.full_messages.to_sentence
                 }
             end
     end
